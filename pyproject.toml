@@ -1,0 +1,11 @@
+[project]
+name="langchain_tutorial"
+version="0.1.0"
+description="LangChain learning project"
+
+requires-python = ">=3.8"
+
+dependencies = [
+    "langchain-core",
+    "langchain-deepseek",
+]
