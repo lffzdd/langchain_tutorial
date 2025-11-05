@@ -1,3 +1,4 @@
+"""两种llm调用方式示例：直接调用与链式调用。"""
 # 方式一
 # LangChain为各llm提供了统一的接口：ChatModel
 from langchain_deepseek.chat_models import ChatDeepSeek

@@ -1,8 +1,11 @@
+"""
+链式写作示例：根据不同风格要求，重写一段文字。
+"""
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from typing import Literal
 
-from langchain_deepseek.chat_models import ChatDeepSeek
+from config.llm import deepseek, vllm
 
 style_map={
     "严谨": "使用正式、客观、学术化的语气；避免夸张修辞。",
@@ -17,10 +20,9 @@ def make_writer(style:Literal["严谨", "科普", "广告"]="科普",max_tokens=
         ("user", "{text}")
     ])
     
-    llm=ChatDeepSeek(
-        model='deepseek-chat',
-        api_key='sk-4d60ba5196d14f939126d5e3b5f1647a'
-    )
+    llm=deepseek
+
+    llm=vllm
     
     parser=StrOutputParser()
 
