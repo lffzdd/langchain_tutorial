@@ -1,4 +1,4 @@
-from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.output_parsers import StrOutputParser
 from typing import List
 from pydantic import BaseModel, Field
 from langchain_core.prompts import ChatPromptTemplate
@@ -6,11 +6,10 @@ from config.llm import deepseek, vllm
 
 prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "你是严谨的摘要器，只输出指定结构，不要解释。"),
+        ("system", "你是严谨的摘要器，只输出Json结构，不要解释。"),
         (
             "user",
             "请从以下文本提取一个标题与3-5条要点：\n\n{text}\n\n"
-            "严格遵循输出格式：\n{format_instructions}",
         ),
     ]
 )
@@ -25,9 +24,9 @@ class Summary(BaseModel):
 
 
 # json_parser = JsonOutputParser()
-json_parser = JsonOutputParser(pydantic_object=Summary)
+parser = StrOutputParser()
 
-chain = prompt | llm | json_parser
+chain = prompt | llm | parser
 
 doc = """
 LangChain 让开发者把 LLM 应用拆成可复用部件：Prompt、模型、工具、检索与解析。
@@ -36,7 +35,7 @@ LangChain 让开发者把 LLM 应用拆成可复用部件：Prompt、模型、�
 """
 
 result = chain.invoke(
-    {"text": doc, "format_instructions": json_parser.get_format_instructions()}
+    {"text": doc}
 )
 print(result)
 # print(result.model_dump())

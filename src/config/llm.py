@@ -5,6 +5,9 @@ vllm = ChatOpenAI(
     model="Qwen/Qwen3-14B-AWQ",
     base_url="http://localhost:8600/v1",
     api_key="EMPTY",
+    # temperature=0.0,
+    # top_p=1.0,
+    seed=42,
     extra_body={"chat_template_kwargs": {"enable_thinking": False}},
 )
 
