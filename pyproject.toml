@@ -6,6 +6,8 @@ description="LangChain learning project"
 requires-python = ">=3.10"
 
 dependencies = [
+    "langchain>=1.0.5",
     "langchain-core",
     "langchain-deepseek",
+    "langgraph>=1.0.2",
 ]
