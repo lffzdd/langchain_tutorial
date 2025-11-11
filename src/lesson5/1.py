@@ -7,7 +7,7 @@ os.environ["OPENAI_API_KEY"] = "sk-ljuovztdpgqafjnufoxhqbuzfzyvctualkzjxekycvpyw
 emb = OpenAIEmbeddings(model="BAAI/bge-m3", base_url="https://api.siliconflow.cn/v1")
 
 # 嵌入查询和文档
-q_vec = emb.embed_query("query:NLP")
+q_vec = emb.embed_query("query:NLP中什么比较普遍")
 d_vecs = emb.embed_documents(
     [
         "passage:使用BGE并进行向量归一化有帮助",
