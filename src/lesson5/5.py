@@ -60,7 +60,10 @@ def format_docs(docs: list[Document]):
 
 
 rag_chain = (
-    {"context": retriever | format_docs, "question": lambda x: x["question"]}
+    {
+        "context": (lambda x: x["question"]) | retriever | format_docs,
+        "question": lambda x: x["question"],
+    }
     | prompt
     | llm
     | parser
