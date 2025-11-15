@@ -1,10 +1,12 @@
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_deepseek.chat_models import ChatDeepSeek
+from langchain_openai import OpenAIEmbeddings
+from pydantic import SecretStr
 
 vllm = ChatOpenAI(
     model="Qwen/Qwen3-14B-AWQ",
     base_url="http://localhost:8600/v1",
-    api_key="EMPTY",
+    api_key=SecretStr("EMPTY"),
     # temperature=0.0,
     # top_p=1.0,
     seed=42,
@@ -12,5 +14,11 @@ vllm = ChatOpenAI(
 )
 
 deepseek = ChatDeepSeek(
-    model="deepseek-chat", api_key="sk-4d60ba5196d14f939126d5e3b5f1647a"
+    model="deepseek-chat", api_key=SecretStr("sk-4d60ba5196d14f939126d5e3b5f1647a")
+)
+
+embeddings = OpenAIEmbeddings(
+    model="BAAI/bge-m3",
+    base_url="https://api.siliconflow.cn/v1",
+    api_key=SecretStr("sk-ljuovztdpgqafjnufoxhqbuzfzyvctualkzjxekycvpywxpx"),
 )

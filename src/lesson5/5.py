@@ -1,6 +1,6 @@
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
-from config.llm import deepseek
+from config.llm import deepseek, embeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
@@ -22,11 +22,6 @@ for title, content in raw_docs:
         docs.append(Document(page_content=chunk, metadata={"title": title}))
 
 # 2) 向量化 + 存入向量库(本地Chroma)
-embeddings = OpenAIEmbeddings(
-    model="BAAI/bge-m3",
-    base_url="https://api.siliconflow.cn/v1",
-    api_key="sk-ljuovztdpgqafjnufoxhqbuzfzyvctualkzjxekycvpywxpx",
-)
 vectordb = Chroma.from_documents(
     docs, embedding=embeddings, collection_name="foot_massage_store"
 )
